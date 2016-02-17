@@ -1,0 +1,21 @@
+{
+  "name": "optimus",
+  "homepage": "https://github.com/devmars/optimus",
+  "authors": [
+    "Evanson <evansonmwangi83@gmail.com>"
+  ],
+  "description": "An online one stop movie store",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

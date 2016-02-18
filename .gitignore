@@ -2,4 +2,4 @@
 *.pyo
 *.txt
 /flask
-/bower
+/bower_components

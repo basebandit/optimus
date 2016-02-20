@@ -13,8 +13,7 @@ from models import User
 def index():
     project = "Optimus"
     name = "Devmars"
-    # return render_template('index.html', project=project, name=name)
-    return render_template('.html')
+    return render_template('index.html')
 
 
 # accepts GET and  POST requests.

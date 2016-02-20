@@ -3,3 +3,4 @@
 *.pyo
 /flask
 /bower_components
+/.idea

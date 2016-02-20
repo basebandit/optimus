@@ -1,6 +1,7 @@
 *.json
 *.pyc
 *.pyo
+*.xml
 /flask
 /bower_components
 /.idea

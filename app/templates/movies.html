@@ -1,0 +1,17 @@
+<a ui-sref="newMovie" class="btn-primary btn-lg nodecoration">Add New Movie</a>
+<table class="table movietable">
+    <tr>
+        <td>
+            <h3>All Movies</h3>
+        </td>
+        <td></td>
+    </tr>
+    {#Loops through all the movie objects obtained from the database and displays the details.#}
+    <tr ng-repeat="movie in movies">
+        <td>{{ movie.title }}</td>
+        <td>
+            <a class="btn btn-primary" ui-sref="viewMovie({id:movie.id})">View</a>
+            <a class="btn btn-danger" ng-click="deleteMovie(movie)">Delete</a>
+        </td>
+    </tr>
+</table>

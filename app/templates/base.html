@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Optimus</title>
+    <link rel="apple-touch-icon" sizes="57x57" href={{ url_for('static',filename='images/apple-icon-57x57.png') }}>
+    <link rel="apple-touch-icon" sizes="60x60" href={{ url_for('static',filename='images/apple-icon-60x60.png') }}>
+    <link rel="apple-touch-icon" sizes="72x72" href={{ url_for('static',filename='images/apple-icon-72x72.png') }}>
+    <link rel="apple-touch-icon" sizes="76x76" href={{ url_for('static',filename='images/apple-icon-76x76.png') }}>
+    <link rel="apple-touch-icon" sizes="114x114" href={{ url_for('static',filename='images/apple-icon-114x114.png') }}>
+    <link rel="apple-touch-icon" sizes="120x120" href={{ url_for('static',filename='images/apple-icon-120x120.png') }}>
+    <link rel="apple-touch-icon" sizes="144x144" href={{ url_for('static',filename='images/apple-icon-144x144.png') }}>
+    <link rel="apple-touch-icon" sizes="152x152" href={{ url_for('static',filename='images/apple-icon-152x152.png') }}>
+    <link rel="apple-touch-icon" sizes="180x180" href={{ url_for('static',filename='images/apple-icon-180x180.png') }}>
+    <link rel="icon" type="image/png" sizes="192x192"
+          href={{ url_for('static',filename='images/android-icon-192x192.png') }}>
+    <link rel="icon" type="image/png" sizes="32x32" href={{ url_for('static',filename='images/favicon-32x32.png') }}>
+    <link rel="icon" type="image/png" sizes="96x96" href={{ url_for('static',filename='images/favicon-96x96.png') }}>
+    <link rel="icon" type="image/png" sizes="16x16" href={{ url_for('static',filename='images/favicon-16x16.png') }}>
+    <link rel="manifest" href="images/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/app.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap-material-design.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}">
+</head>
+<header>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <img style="max-width:120px;margin-top: -7px;"
+                 src="{{ url_for('static',filename='images/optimuslogo.png' ) }}">
+        </a>
+    </div>
+    <div class="container-fluid">
+        <a href="/catalog">
+            <button type="button" id="btn" class="btn btn-dark" aria-label="Left Align"
+                    style="margin-top: 5px;margin-bottom: 5px;height: 44px;margin-right: 15px">
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                Optimus Catalog
+            </button>
+        </a>
+        <ul class="nav navbar-nav navbar-right">
+            <div style="margin-right: 10px;margin-left: 15px;margin-top:15px;margin-bottom: 3px;"
+                 class="container-fluid">
+
+                <a role="presentation" href="login"><span
+                        class="glyphicon glyphicon-log-in"></span>Login </a>
+
+                <a role="presentation" class="active" href="signup"><span
+                        class="glyphicon glyphicon-pencil"></span>Sign up </a>
+
+
+            </div>
+        </ul>
+    </div>
+</header>
+<body>
+{% block content %} {% endblock %}
+<script type="text/javascript" src="{{ url_for('static',filename='js/material.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/rippples.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script>
+</body>
+
+</html>

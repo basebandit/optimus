@@ -17,37 +17,24 @@ def index():
 
 
 # accepts GET and  POST requests.
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     """For GET requests, display the login form. For POSTS, login the current user
     by processing the form."""
-
-    json_data = request.json
-    user = User.query.filter_by(email=json_data['email']).first()
-    if user and bcrypt.check_password_hash(user.password, json_data['password']):
-        session['logged_in'] = True
-        status = True
-    else:
-        status = False
-    return jsonify({'result': status})
+    return render_template("login.html")
 
 
-@app.route('/register', methods=['POST'])
-def register():
-    json_data = request.json
-    user = User(email=json_data['email'],
-                password=json_data['password'])
-    try:
-        db.session.add(user)
-        db.session.commit()
-        status = 'success'
-    except:
-        status = 'this user is already registered'
-    db.session.close()
-    return jsonify({'result': status})
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    return render_template('signup.html')
 
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
     return jsonify({'result': 'success'})
+
+
+@app.route('/catalog', methods=['GET', 'POST'])
+def catalog():
+    return render_template('catalog.html')

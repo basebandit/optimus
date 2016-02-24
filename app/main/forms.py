@@ -1,8 +1,8 @@
 from flask.ext.wtf import Form
-from wtforms import StringField,BooleanField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField
+from wtforms.validators import Required
 
-class LoginForm(Form):
-	"""Validates user submitted data."""
-	openid = StringField('openid',validators=[DataRequired()])
-	remember_me = BooleanField('remember_me',default=False)
+
+class NameForm(Form):
+    name = StringField('What is your name?', validators=[Required()])
+    submit = SubmitField('Submit')

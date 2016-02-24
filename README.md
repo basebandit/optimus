@@ -1,4 +1,4 @@
-# Project Name
+# Optimus
 
 Optimus is an online movie store,that allows user checkout their favorite as well as latest movies.
 The users get to see which movies are popular and also get to rate them as well.

@@ -1,18 +1,13 @@
-from flask import render_template, jsonify, request, url_for, flash, redirect
-from flask.ext.login import login_user
+from flask import render_template, redirect, request, url_for, flash
+from flask.ext.login import login_user, logout_user, login_required
 from . import auth
-from app import app
 from app import db
-from .forms import LoginForm
-from app.main.models import User
+from ..models import User
+from .forms import LoginForm, SignupForm
 
 
-# accepts GET and  POST requests.
-@app
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    """For GET requests, display the login form. For POSTS, login the current user
-    by processing the form."""
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -20,20 +15,23 @@ def login():
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('Invalid username or password.')
-    return render_template("auth/login.html", form=form)
+    return render_template('auth/login.html', form=form)
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@auth.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template('auth/signup.html')
+    form = SignupForm()
+    if form.validate_on_submit():
+        user = User(email=form.email.data, username=form.username.data, password=form.password.data)
+        db.session.add(user)
+        flash('You can now login.')
+        return redirect(url_for('auth.login'))
+    return render_template('auth/signup.html', form=form)
 
 
-@app.route('/logout')
+@auth.route('/logout')
+@login_required
 def logout():
-    # session.pop('logged_in', None)
-    return jsonify({'result': 'success'})
-
-
-@app.route('/catalog', methods=['GET', 'POST'])
-def catalog():
-    return render_template('catalog.html')
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('main.index'))

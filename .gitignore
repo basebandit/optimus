@@ -2,9 +2,13 @@
 *.pyc
 *.pyo
 *.xml
+*.txt
+*.sqlite
+*.db
 /flask
 /bower_components
 /.idea
 /lib
 /migrations
+
 

@@ -1,8 +1,6 @@
 <snippet>
   <content><![CDATA[
 # ${1:Optimus}
- Project description
- ===================
 Optimus is an online movies store,where movie fanatics can check the latest movies and can review them.
 Optimus Admin is responisble of adding and deleting movies to the stores.Future releases will include a queries from
 ImDB api to ease up the CRUD of movies to the store.

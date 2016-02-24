@@ -1,10 +1,10 @@
 from app import db
-from app import bcrypt
+from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-import datetime
+from app import login_manager
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """An admin user capable of viewing reports.
 
        :param str email: email address of user
@@ -15,9 +15,10 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(20), unique=True)
-    email = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
+    username = db.Column(db.String(64), unique=True, index=True)
+    email = db.Column(db.String(64), unique=True, nullable=False, index=True)
+    password = db.Column(db.String(128), nullable=False)
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     registered_on = db.Column(db.DATETIME, nullable=False)
 
     @property
@@ -31,24 +32,16 @@ class User(db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __init__(self, username,email, password):
-        self.email = email
-        self.password = bcrypt.generate_password_hash(password)
-        self.registered_on = datetime.datetime.now()
-        self.username = username
-
     def is_active(self):
         """True, as all users are active."""
         return True
 
     def get_id(self):
         """Return the email address to satisfy Flask-Login's requirements."""
-        # return self.email
         return self.id
 
     def is_authenticated(self):
         """Return True if the user is authenticated."""
-        # return self.authenticated
         return True
 
     def is_anonymous(self):
@@ -77,3 +70,9 @@ class Movie(db.Model):
     director = db.Column(db.String, default="Unknown director")
     genre = db.Column(db.String, default=None, nullable=True)
     availability = db.Column(db.Integer, default=None, nullable=False)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """receives a user identifier as a Unicode string"""
+    return User.query.get(int(user_id))

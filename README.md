@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-<snippet>
-  <content><![CDATA[
-# ${1:Optimus}
-Optimus is an online movies store,where movie fanatics can check the latest movies and can review them.
-Optimus Admin is responisble of adding and deleting movies to the stores.Future releases will include a queries from
-ImDB api to ease up the CRUD of movies to the store.
-=======
 # Optimus
 
 Optimus is an online movie store,that allows user checkout their favorite as well as latest movies.
 The users get to see which movies are popular and also get to rate them as well.
 
->>>>>>> develop
 ## Installation
 
 All you need is an internet connection.

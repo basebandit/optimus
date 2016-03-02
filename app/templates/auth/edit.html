@@ -1,101 +1,27 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% import "partials/render_alert.html" as macros %}
+{% import "partials/_alert_messages.html" as macros %}
 
-{% block title %}
-    Optimus - Add Movie
-{% endblock title %}
+
+{% block title %}Optimus - Edit Movie{% endblock %}
 
 {% block page_content %}
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 auth-login-form">
-            <div class="row">
-                <h1 class="text-center">Edit Movie</h1>
-                <hr>
-                <div class="col-sm-10 col-sm-offset-1">
-                    {{ macros.render_alert('alert-danger') }}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 auth-login-form">
+                <div class="page-header text-center">
+                    <h1>Edit {{ movie.title }}</h1>
                 </div>
-                <div class="col-sm-8 col-sm-offset-2">
-                    <form role="form" method="post" action="{{ url_for('auth.edit_movie') }}">
-
-
-                        <!-- Form Name -->
-
-
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label for="txtTitle">Title</label>
-
-                            <input id="txtTitle" name="movieTitle" type="text" placeholder="placeholder"
-                                   class="form-control input-md">
-
-                        </div>
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label for="txtTitle">Genre</label>
-
-                            <input id="txtTitle" name="movieGenre" type="text" placeholder="Category of the movie"
-                                   class="form-control input-md">
-
-                        </div>
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label for="txtTitle">Director</label>
-
-                            <input id="txtTitle" name="movieDirector" type="text" placeholder="Who directed the movie?"
-                                   class="form-control input-md">
-
-                        </div>
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label for="txtTitle">Release Year</label>
-
-                            <input id="txtTitle" name="movieRelease" type="text"
-                                   placeholder="Which year was the movie released?"
-                                   class="form-control input-md">
-
-                        </div>
-                        <!-- Textarea -->
-                        <div class="form-group">
-                            <label for="txtPost">Review</label>
-
-                            <textarea class="form-control" id="txtPost" name="inputDescription"></textarea>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="txtPost">Photos</label>
-
-                            <div class="input-group">
-                    <span class="input-group-btn">
-                    <span class="btn btn-primary btn-file">
-                        Browse&hellip; <input type="file" id="fileupload" name="file" multiple>
-                    </span>
-                    </span>
-                                <input type="text" class="form-control" readonly>
-                            </div>
-
-                        </div>
-
-
-                        <!-- Button -->
-                        <div class="form-group">
-
-                            <p class="text-center">
-                                <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit"
-                                       value="Edit"/>
-                            </p>
-                        </div>
-
-
-                    </form>
-
+                <div class="row">
+                    <div class="col-xs-10 col-sm-8 col-sm-offset-2 profile-form">
+                        {{ macros.render_alert('alert-danger') }}
+                        {{ wtf.quick_form(form) }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock page_content %}
+{% endblock %}
 {% block scripts %}
     {{ super() }}
 {% endblock %}

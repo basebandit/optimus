@@ -1,0 +1,13 @@
+Dear {{ user.username }},
+
+Welcome to Optimus!
+
+To confirm your account please click on the following link:
+
+{{ url_for('auth.verify', token=token, _external=True) }}
+
+Sincerely,
+
+The Optimus Team
+
+Ps:Do not reply to this email.

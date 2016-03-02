@@ -32,7 +32,7 @@
 			}
 		},
 		gridEl = document.getElementById('theGrid'),
-		/*sidebarEl = document.getElementById('theSidebar'),*/
+		sidebarEl = document.getElementById('theSidebar'),
 		gridItemsContainer = gridEl.querySelector('section.grid'),
 		contentItemsContainer = gridEl.querySelector('section.content'),
 		gridItems = gridItemsContainer.querySelectorAll('.grid__item'),
@@ -42,7 +42,7 @@
 		lockScroll = false, xscroll, yscroll,
 		isAnimating = false,
 		menuCtrl = document.getElementById('menu-toggle');
-		/*menuCloseCtrl = sidebarEl.querySelector('.close-button');*/
+		menuCloseCtrl = sidebarEl.querySelector('.close-button');
 
 	/**
 	 * gets the viewport width and height
@@ -114,11 +114,11 @@
 			}
 		});
 
-		/*menuCloseCtrl.addEventListener('click', function() {
+		menuCloseCtrl.addEventListener('click', function() {
 			if( classie.has(sidebarEl, 'sidebar--open') ) {
 				classie.remove(sidebarEl, 'sidebar--open');
 			}
-		});*/
+		});
 	}
 
 	function loadContent(item) {
@@ -126,7 +126,7 @@
 		var dummy = document.createElement('div');
 		dummy.className = 'placeholder';
 
-		// set the width/heigth and position
+		// set the width/height and position
 		dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
 		dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
 

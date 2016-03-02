@@ -70,6 +70,7 @@ button:focus {
     top: 0;
     left: 0;
     padding: 2em 1em;
+    margin: 4.75em 0 0;
 }
 
 .sidebar h1 {
@@ -902,7 +903,7 @@ button:focus {
 
     .grid__item:hover::before,
     .grid__item:focus::before {
-        border: 3px solid #747474/*rgba(129, 196, 131, 0.5)*/;
+        border: 3px solid #747474 /*rgba(129, 196, 131, 0.5)*/;
     }
 
     .grid__item--loading.grid__item::before {

@@ -1,7 +1,7 @@
 from flask import render_template
-from ..models import Movie
+from app.models import Movie
 from random import randint
-from . import main
+from app.main import main
 
 
 @main.route('/')

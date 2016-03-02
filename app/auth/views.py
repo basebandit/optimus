@@ -1,12 +1,12 @@
 from flask import render_template, redirect, request, url_for, flash
 from flask.ext.login import login_user, logout_user, login_required
 from sqlalchemy.sql import func
-from . import auth
+from app.auth import auth
 import re
 from app import db
 from random import randint
-from ..models import User, Movie
-from .forms import LoginForm, SignupForm, AddMovieForm, EditMovieForm
+from app.models import User, Movie
+from forms import LoginForm, SignupForm, AddMovieForm, EditMovieForm
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -43,7 +43,7 @@ def signup():
 @login_required
 def logout():
     logout_user()
-    #flash('Please Login To Access The Dashboard.')
+    # flash('Please Login To Access The Dashboard.')
     return redirect(url_for('main.index'))
 
 
@@ -58,7 +58,7 @@ def add_movie():
         db.session.add(movie)
         db.session.commit()
         return redirect(request.args.get('next') or url_for('auth.dashboard'))
-    #flash('Movie added successfully!')
+    # flash('Movie added successfully!')
     return render_template('auth/add.html', form=form)
 
 
@@ -72,7 +72,6 @@ def delete_movie():
 @login_required
 def edit_movie():
     form = EditMovieForm()
-
 
 
 @auth.route('/dashboard')

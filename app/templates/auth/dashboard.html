@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "partials/render_alert.html" as macros %}
+
+{% block title %}
+    Optimus - Admin Dashboard
+{% endblock title %}
+
+{% block page_content %}
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <!--overview start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="dashboard-page-header"><img
+                            src="{{ url_for('static',filename='images/dashboard.png') }}"> Dashboard</h3>
+                    <ol class="breadcrumb">
+                        <li><span class="glyphicon glyphicon-home"></span>&nbsp;<a href="{{ url_for('main.index') }}">Home</a>
+                        </li>
+                        <li><span class="glyphicon glyphicon-dashboard"></span>&nbsp;Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="info-box blue-bg">
+                        <img src="{{ url_for('static',filename='images/view.png') }}">
+                        <div class="count">{{ views }}</div>
+                        <div class="title">Views</div>
+                    </div><!--/.info-box-->
+                </div><!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="info-box brown-bg">
+                        <img src="{{ url_for('static',filename='images/releases.png') }}">
+                        <div class="count">{{ releases }}</div>
+                        <div class="title">New Releases</div>
+                    </div><!--/.info-box-->
+                </div><!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="info-box dark-bg">
+                        <img src="{{ url_for('static',filename='images/available.png') }}">
+                        <div class="count">{{ available }}</div>
+                        <div class="title">Available</div>
+                    </div><!--/.info-box-->
+                </div><!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="info-box green-bg">
+                        <img src="{{ url_for('static',filename='images/store.png') }}">
+                        <div class="count">{{ count }}</div>
+                        <div class="title">Store</div>
+                    </div><!--/.info-box-->
+                </div><!--/.col-->
+
+            </div><!--/.row-->
+
+            <!-- Buttons -->
+            <div class="form-group">
+                <div class="row">
+                    <!-- Buttons -->
+                    <div class="col-lg-offset-2 col-lg-9">
+                        <a href="{{ url_for('auth.add_movie') }}">
+                            <button type="submit" class="btn btn-primary">Add Movie</button>
+                        </a>
+                        <a href="{{ url_for('auth.delete_movie') }}">
+                            <button type="submit" class="btn btn-danger">Delete Movie</button>
+                        </a>
+                        <a href="{{ url_for('auth.edit_movie') }}">
+                            <button type="reset" class="btn btn-default">Edit Movie</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-9 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2><i class="fa fa-desktop"></i><strong>Movies In Store</strong></h2>
+                            <div class="panel-actions">
+                                <a href="{{ url_for('auth.dashboard') }}" class="btn-setting"><i
+                                        class="fa fa-rotate-right"></i></a>
+                                <a href="{{ url_for('auth.dashboard') }}" class=" btn-minimize"><i
+                                        class="fa fa-chevron-up"></i></a>
+                                <a href="{{ url_for('main.index') }}" class="btn-close"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table bootstrap-datatable ">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Title</th>
+                                    <th>Genre</th>
+                                    <th>Release Year</th>
+                                    <th>Rating</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for movie in movies %}
+                                    <tr>
+                                        <td><img src="{{ url_for('static',filename='images/movie.png') }}"
+                                                 style="height:18px; margin-top:-2px;"></td>
+                                        <td>{{ movie.title }}</td>
+                                        <td>{{ movie.genre }}</td>
+                                        <td>{{ movie.release_year }}</td>
+                                        <td>
+                                            <div class="progress thin">
+                                                <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                     aria-valuenow="{{ _danger }}" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: {{ _warning }}%">
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                                     aria-valuenow="{{ _warning }}" aria-valuemin="0"
+                                                     aria-valuemax="100"
+                                                     style="width: {{ _danger }}%">
+                                                </div>
+                                            </div>
+                                            <span class="sr-only">73%</span>
+                                        </td>
+                                        <td><i class="fa fa-pencil fa-fw blue"></i></td>
+                                        <td><i class="fa fa-trash-o fa-fw red"></i></td>
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div><!--/col-->
+                <div class="col-md-3">
+
+                    <div class="social-box facebook">
+                        <i class="fa fa-facebook"></i>
+                        <ul>
+                            <li>
+                                <strong>256k</strong>
+                                <span>friends</span>
+                            </li>
+                            <li>
+                                <strong>359</strong>
+                                <span>feeds</span>
+                            </li>
+                        </ul>
+                    </div><!--/social-box-->
+                </div>
+                <div class="col-md-3">
+
+                    <div class="social-box google-plus">
+                        <i class="fa fa-google-plus"></i>
+                        <ul>
+                            <li>
+                                <strong>962</strong>
+                                <span>followers</span>
+                            </li>
+                            <li>
+                                <strong>256</strong>
+                                <span>circles</span>
+                            </li>
+                        </ul>
+                    </div><!--/social-box-->
+
+                </div><!--/col-->
+                <div class="col-md-3">
+
+                    <div class="social-box twitter">
+                        <i class="fa fa-twitter"></i>
+                        <ul>
+                            <li>
+                                <strong>1562k</strong>
+                                <span>followers</span>
+                            </li>
+                            <li>
+                                <strong>2562</strong>
+                                <span>tweets</span>
+                            </li>
+                        </ul>
+                    </div><!--/social-box-->
+
+                </div><!--/col-->
+
+            </div>
+        </section>
+    </section>
+
+{% endblock page_content %}
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

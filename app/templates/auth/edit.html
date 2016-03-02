@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "partials/_alert_messages.html" as macros %}
+
+
+{% block title %}Optimus - Edit Movie{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 auth-login-form">
+                <div class="page-header text-center">
+                    <h1>Edit {{ movie.title }}</h1>
+                </div>
+                <div class="row">
+                    <div class="col-xs-10 col-sm-8 col-sm-offset-2 profile-form">
+                        {{ macros.render_alert('alert-danger') }}
+                        {{ wtf.quick_form(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

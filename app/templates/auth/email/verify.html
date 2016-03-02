@@ -1,0 +1,11 @@
+<p>Hi {{ user.username }}?</p>
+<p>Welcome to <b>Optimus - Your one stop store for latest movies</b>!</p>
+<p>To confirm your account please <a href="{{ url_for('auth.verify',token=token,_external=True) }}">Click here</a>.
+</p>
+<p>Alternatively, you can paste the following link in your browser's location bar:</p>
+<p>{{ url_for('auth.verify',token=token,_external=True) }}</p>
+<p>Best Regards</p>
+<p>Optimus Entertainment</p>
+<p>
+    <small>Ps:Do not reply to this email.</small>
+</p>

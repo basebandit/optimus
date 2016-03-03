@@ -42,8 +42,14 @@
                             <li><a href="{{ url_for('auth.login') }}"><span
                                     class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Admin</a></li>
                         {% endif %}
-                        <li><a href="{{ url_for('auth.signup') }}"><span
-                                class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Sign up</a></li>
+                        {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('auth.signup') }}"><span
+                                    class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;{{ current_user.username }}
+                            </a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('auth.signup') }}"><span
+                                    class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Sign up</a></li>
+                        {% endif %}
                         <div class="clearfix"></div>
 
                     </ul>

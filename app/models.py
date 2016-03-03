@@ -2,7 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask.ext.login import UserMixin, current_app
 from datetime import datetime
-from . import db, login_manager
+from app import db, login_manager
 
 
 class User(UserMixin, db.Model):
@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     is_admin = db.Column(db.Boolean, index=True, default=False)
+    # social_id = db.Column(db.String(64), nullable=False, unique=True)
     last_update = db.Column(db.DateTime(), default=datetime.now)
     password_hash = db.Column(db.String(128))
 
@@ -19,6 +20,9 @@ class User(UserMixin, db.Model):
         if not self.is_admin:
             if self.email == current_app.config['OPTIMUS_ADMIN']:
                 self.is_admin = True
+
+    def is_authenticated(self):
+        return True
 
     @property
     def password(self):
@@ -92,6 +96,9 @@ class User(UserMixin, db.Model):
         self.email = new_email
         db.session.add(self)
         return True
+
+    def is_anonymous(self):
+        return False
 
     @login_manager.user_loader
     def load_user(user_id):

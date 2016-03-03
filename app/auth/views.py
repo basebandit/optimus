@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-from flask import render_template, redirect, request, url_for, flash
-from flask.ext.login import login_user, logout_user, login_required
-from sqlalchemy.sql import func
-from app.auth import auth
-import re
-from app import db
-from random import randint
-from app.models import User, Movie
-from forms import LoginForm, SignupForm, AddMovieForm, EditMovieForm
-=======
 from random import randint
 import re
 from app import db
@@ -20,7 +9,6 @@ from app.auth import twitter
 from flask import render_template, redirect, request, url_for, flash, g
 from flask.ext.login import login_user, logout_user, login_required, session, current_user
 from sqlalchemy.sql import func
->>>>>>> develop
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -53,7 +41,6 @@ def get_twitter_token():
         return resp['oauth_token'], resp['oauth_token_secret']
 
 
-
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
@@ -72,11 +59,10 @@ def signup():
 @auth.route('/logout')
 @login_required
 def logout():
-<<<<<<< HEAD
     logout_user()
     # flash('Please Login To Access The Dashboard.')
     return redirect(url_for('main.index'))
-=======
+
     if Config.TWITTER_LOGIN:
         session.pop('twitter_oauth', None)
         flash('You were signed out successfully!')
@@ -85,7 +71,6 @@ def logout():
         logout_user()
         flash('You were signed out successfully!')
         return redirect(url_for('main.index'))
->>>>>>> develop
 
 
 @auth.route('/movies/add', methods=['GET', 'POST'])

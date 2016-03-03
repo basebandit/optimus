@@ -96,7 +96,6 @@ def oauthorized():
         redirect(url_for('main.index'))
     else:
         session['twitter_oauth'] = resp
-    print resp['screen_name']
     this_user = User.query.filter_by(username=resp['screen_name']).first()
     if this_user is None:
         new_user = User(username=resp['screen_name'],

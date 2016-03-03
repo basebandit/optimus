@@ -1,19 +1,20 @@
-from flask import render_template, redirect, request, url_for, flash
-from flask.ext.login import login_user, logout_user, login_required
-from sqlalchemy.sql import func
-from . import auth
+from random import randint
 import re
 from app import db
-from random import randint
-from ..models import User, Movie
-from .forms import LoginForm, SignupForm, AddMovieForm, EditMovieForm
+from app.auth import auth
+from app.auth.forms import LoginForm, SignupForm, AddMovieForm, EditMovieForm
+from app.models import User, Movie
+from config import Config
+from app.auth import twitter
+from flask import render_template, redirect, request, url_for, flash, g
+from flask.ext.login import login_user, logout_user, login_required, session, current_user
+from sqlalchemy.sql import func
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    # if current_user.is_authenticated:
-    # return redirect(url_for('main.index'))
-
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -22,6 +23,23 @@ def login():
             return redirect(request.args.get('next') or url_for('auth.dashboard'))
         flash('Invalid username or password.')
     return render_template('auth/login.html', form=form)
+
+
+@auth.route('/twitter-login')
+def twitter_login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+
+    callback_url = url_for('auth.oauthorized', next=request.args.get('next'))
+    return twitter.authorize(callback=callback_url or request.referrer or None)
+
+
+@twitter.tokengetter
+def get_twitter_token():
+    if 'twitter_oauth' in session:
+        resp = session['twitter_oauth']
+        return resp['oauth_token'], resp['oauth_token_secret']
+
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -42,9 +60,14 @@ def signup():
 @auth.route('/logout')
 @login_required
 def logout():
-    logout_user()
-    #flash('Please Login To Access The Dashboard.')
-    return redirect(url_for('main.index'))
+    if Config.TWITTER_LOGIN:
+        session.pop('twitter_oauth', None)
+        flash('You were signed out successfully!')
+        return redirect(url_for('main.index'))
+    else:
+        logout_user()
+        flash('You were signed out successfully!')
+        return redirect(url_for('main.index'))
 
 
 @auth.route('/movies/add', methods=['GET', 'POST'])
@@ -58,8 +81,29 @@ def add_movie():
         db.session.add(movie)
         db.session.commit()
         return redirect(request.args.get('next') or url_for('auth.dashboard'))
-    #flash('Movie added successfully!')
+    # flash('Movie added successfully!')
     return render_template('auth/add.html', form=form)
+
+
+@auth.route('/oauthorized')
+def oauthorized():
+    resp = twitter.authorized_response()
+    if resp is None:
+        flash('You denied the request to sign in.')
+        redirect(url_for('main.index'))
+    else:
+        session['twitter_oauth'] = resp
+    print resp['screen_name']
+    this_user = User.query.filter_by(username=resp['screen_name']).first()
+    if this_user is None:
+        new_user = User(username=resp['screen_name'],
+                        password=resp['oauth_token_secret'])
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+    else:
+        login_user(this_user)
+    return redirect(url_for('auth.dashboard'))
 
 
 @auth.route('movies/delete')
@@ -72,7 +116,6 @@ def delete_movie():
 @login_required
 def edit_movie():
     form = EditMovieForm()
-
 
 
 @auth.route('/dashboard')

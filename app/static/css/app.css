@@ -8,6 +8,12 @@
     color: #747474;
 }
 
+/*---------Dashboard home link----------*/
+#dash-hm a {
+    color: #000;
+    font-weight: bold;
+}
+
 /*----*/
 .page-header {
     margin: 12px 0 20px;

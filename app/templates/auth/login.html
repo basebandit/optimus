@@ -21,8 +21,11 @@
                     No account?
                     <a href="{{ url_for('auth.signup') }}">Create account</a>
                     <br>
-                    Forgot your password?
-                   {# <a href="{{ url_for('auth.password_reset') }}">Click Here.</a>#}
+                    <a href="{{ url_for('auth.twitter_login') }}"><img
+                            src="{{ url_for('static', filename='images/sign-in.png') }}"
+                            alt="sign in"></a>;
+                    {#Forgot your password?#}
+                    {# <a href="{{ url_for('auth.password_reset') }}">Click Here.</a>#}
                 </div>
             </div>
         </div>

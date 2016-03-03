@@ -14,6 +14,7 @@ class Config:
     OPTIMUS_MAIL_SUBJECT_PREFIX = '[Optimus]'
     OPTIMUS_MAIL_SENDER = 'Optimus Admin <evansonmwangi83@gmail.com>'
     OPTIMUS_ADMIN = os.environ.get('OPTIMUS_ADMIN')
+    TWITTER_LOGIN = False
 
     @staticmethod
     def init_app(app):

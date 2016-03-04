@@ -27,6 +27,7 @@ def login():
 
 @auth.route('/twitter-login')
 def twitter_login():
+    Config.TWITTER_LOGIN = True
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
 

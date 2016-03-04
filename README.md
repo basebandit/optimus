@@ -14,25 +14,25 @@ The users get to see which movies are popular and also get to rate them as well.
 
 1. Download the zip folder
 2. Ensure you have python 2.7.11 or 3.4.2 installed(Most preferably python 2.7.11)
-   sudo apt-get install python
+    <p>sudo apt-get install python</p>
 3. Install pip 
-   python install pip
+    <p>python install pip</p>
 4. Install virtual env
-   pip install virtualenv
+    <p>pip install virtualenv</p>
 5. Go to the app root folder
-   cd <project-root-folder>
+    <p>cd project-root-folder</p>
 6. Create a virtual environment 
-   virualenv venv
+    <p>virualenv venv</p>
 7. Install the required project requirements from the requirement.txt file
-   pip install -r requirements.txt
+    <p>pip install -r requirements.txt</p>
 8. Create the databases
-   python manage.py db init
+    <p>python manage.py db init</p>
 9. Create the database tables
-    python manage.py shell
-    >>>db.create_all()
-    >>>quit()
+    <p>python manage.py shell</p>
+    <p>db.create_all()</p>
+    <p>quit()</p>
 10. Deploy the app locally
-    python manage.py runserver
+    <p>python manage.py runserver</p>
 
 
 ## Usage

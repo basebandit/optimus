@@ -83,8 +83,9 @@ def add_movie():
                       availability=form.availability.data)
         db.session.add(movie)
         db.session.commit()
-        return redirect(request.args.get('next') or url_for('auth.dashboard'))
-    # flash('Movie added successfully!')
+        flash('Movie added successfully!')
+        return redirect(url_for('auth.dashboard'))
+
     return render_template('auth/add.html', form=form)
 
 
